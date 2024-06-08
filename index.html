@@ -7,54 +7,55 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Calculator</title>
     <link rel="stylesheet" href="./styles/main.css">
+    <link rel="icon" href="./icon/calculator-icon.png">
 </head>
-<body>
+<body class="body">
 <div class="wrapper">
- <main>
-    <div class="container">
-     <section class="screen">
-        <p id="output-field-top"></p>
-        <p id="output-field-bottom"></p>
-     </section>
-     <section class="calc-btns">
-         <div class="btn-holder-left">
-            <div class="left-top">
-                <button class="test-suboper" value="AC">AC</button>
-                <button class="test-suboper" value="reverse">+/-</button>
-                <button class="test-suboper" value="%">%</button>
-            </div>
-             <div class="left-bottom">
-                 <div>
-                     <button class="test-numbers" value="7">7</button>
-                     <button class="test-numbers" value="8">8</button>
-                     <button class="test-numbers" value="9">9</button>
-                 </div>
-                 <div>
-                     <button class="test-numbers" value="4">4</button>
-                     <button class="test-numbers" value="5">5</button>
-                     <button class="test-numbers" value="6">6</button>
-                 </div>
-                 <div>
-                     <button class="test-numbers" value="1">1</button>
-                     <button class="test-numbers" value="2">2</button>
-                     <button class="test-numbers" value="3">3</button>
-                 </div>
-                 <div class="zero-number">
-                     <button class="calc-number zero test-numbers" value="0">0</button>
-                     <button class="test-numbers" value=".">.</button>
-                 </div>
-             </div>
-         </div>
-         <div class="btn-holder-right">
-             <button value="/">/</button>
-             <button value="*">x</button>
-             <button value="-">-</button>
-             <button value="+">+</button>
-             <button class="equal-btn" value="=">=</button>
-         </div>
-     </section>
-    </div>
- </main>
+    <main class="calculator-body">
+        <div class="container">
+            <section class="screen">
+                <p id="output-field-top"></p>
+                <p id="output-field-bottom"></p>
+            </section>
+            <section class="calc-btns">
+                <div class="btn-holder-left">
+                    <div class="left-top">
+                        <button class="test-suboper" value="AC">AC</button>
+                        <button class="test-suboper" value="reverse">+/-</button>
+                        <button class="test-suboper" value="%">%</button>
+                    </div>
+                    <div class="left-bottom">
+                        <div>
+                            <button class="test-numbers" value="7">7</button>
+                            <button class="test-numbers" value="8">8</button>
+                            <button class="test-numbers" value="9">9</button>
+                        </div>
+                        <div>
+                            <button class="test-numbers" value="4">4</button>
+                            <button class="test-numbers" value="5">5</button>
+                            <button class="test-numbers" value="6">6</button>
+                        </div>
+                        <div>
+                            <button class="test-numbers" value="1">1</button>
+                            <button class="test-numbers" value="2">2</button>
+                            <button class="test-numbers" value="3">3</button>
+                        </div>
+                        <div class="zero-number">
+                            <button class="calc-number zero test-numbers" value="0">0</button>
+                            <button class="test-numbers" value=".">.</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-holder-right">
+                    <button value="/">/</button>
+                    <button value="*">x</button>
+                    <button value="-">-</button>
+                    <button value="+">+</button>
+                    <button class="equal-btn" value="=">=</button>
+                </div>
+            </section>
+        </div>
+    </main>
 </div>
 <script src="./script/index.js"></script>
 </body>
