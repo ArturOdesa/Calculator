@@ -18,7 +18,7 @@ function keydownHandler (e) {
     btnKey = e.key;
     if (btnKey === 'Enter') {
         e.preventDefault();
-    //     install function for calculation !!!
+        createSecondOperand();
     }
     if (!isNaN(btnKey) || btnKey === '.') {
         console.log(btnKey)
@@ -67,6 +67,7 @@ function btnsClickHandler(e) {
         if (btn.value === '%') {
             actions.push(btn.value);
             console.log(actions);
+            calculating();
         }
         else {
             actions.push(btn.value);
@@ -75,8 +76,6 @@ function btnsClickHandler(e) {
         }
     }
     else {
-        // if (btn.value === 'reverse')
-        //     Run calculating function !!!
         console.log(btn.value)
         switch (btn.value) {
             case "reverse":
@@ -89,7 +88,6 @@ function btnsClickHandler(e) {
                 clearAllData();
                 break;
             case '=':
-            case '%':
                 createSecondOperand();
         }
     }
@@ -158,15 +156,46 @@ function createSecondOperand() {
         console.log(value2);
     }
     calculating();
-    // displayCurrNumber();
+}
+
+function createSecondOperandPercent() {
+    if (numbers.length !== 0){
+        value2 = numbers.reduce((prev, curr) => prev + curr);
+        numbers = [];
+        console.log(value2)
+    }
+    else {
+        value2 = value1;
+        console.log(value2);
+    }
 }
 
 function calculating() {
     let action = actions[actions.length - 1];
+    if (action === "%") {
+        if (actions.length === 1) {
+            createFirstOperand();
+            operation = `${value1} * 0.01`;
+            result = eval(operation);
+            result = parseFloat(result.toFixed(3));
+            value1 = String(result);
+        }
+        else if (actions.length > 1) {
+            createSecondOperandPercent();
+            operation = operation = `${value1} ${actions[actions.length - 2]} (${value1} / 100 * ${value2})`;
+            console.log(operation);
+            result = eval(operation);
+            result = parseFloat(result.toFixed(3));
+            value1 = String(result);
+            console.log(value1)
+        }
+    }
+    else {
     operation = `${value1} ${action} ${value2}`
     result = eval(operation);
     result = parseFloat(result.toFixed(3));
     value1 = String(result);
+    }
     actions = [];
     displayCurrNumber();
 }
