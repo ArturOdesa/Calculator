@@ -22,24 +22,33 @@ function keydownHandler (e) {
     }
     if (!isNaN(btnKey) || btnKey === '.') {
         console.log(btnKey)
-        if (btnKey === '.' && numbers.length === 0 ) {
+        if (btnKey === '.' && numbers.length === 0) {
             numbers.push('0', '.')
-            displayCurrNumber();
         }
         else {
-            numbers.push(btnKey);
-            displayCurrNumber();
+            if (numbers.includes('.', 0) && btnKey === '.') {
+                return;
+            }
+            else {
+                numbers.push(btnKey);
+            }
         }
+        displayCurrNumber();
     }
     else if (btnKey !== 'Enter' && isNaN(btnKey)) {
-        if (numbers.length === 0 && btnKey === '-' && !result) {
+        if (numbers.length === 0 && btnKey === '-' && !result && !value1) {
             numbers.push(btnKey);
             displayCurrNumber();
         }
         else {
-        actions.push(btnKey);
-        createFirstOperand();
-        console.log(actions);
+            if (btnKey === actions[actions.length - 1]) {
+                createSecondOperand();
+            }
+            else {
+                actions.push(btnKey);
+                createFirstOperand();
+                console.log(actions);
+            }
         }
         if (btnKey === 'Backspace' && numbers.length !== 0) {
             clearNumber();
@@ -54,14 +63,18 @@ function keydownHandler (e) {
 function btnsClickHandler(e) {
     btn = e.target;
     if ((!isNaN(btn.value) || btn.value === '.')) {
-        if (btn.value === '.' && numbers.length === 0 ) {
+        if (btn.value === '.' && numbers.length === 0) {
             numbers.push('0', '.')
-            displayCurrNumber();
         }
         else {
-        numbers.push(btn.value);
-        displayCurrNumber();
+            if (numbers.includes('.', 0) && btn.value === '.') {
+                return;
+            }
+            else {
+                numbers.push(btn.value);
+            }
         }
+        displayCurrNumber();
     }
     else if (btn.value !== '=' && btn.value !== 'AC' && btn.value !== 'reverse' && btn.value !== 'C') {
         if (btn.value === '%') {
@@ -70,9 +83,14 @@ function btnsClickHandler(e) {
             calculating();
         }
         else {
-            actions.push(btn.value);
-            createFirstOperand();
-            console.log(actions);
+            if (btn.value === actions[actions.length - 1]) {
+                createSecondOperand();
+            }
+            else {
+                actions.push(btn.value);
+                createFirstOperand();
+                console.log(actions);
+            }
         }
     }
     else {
@@ -138,6 +156,9 @@ function createFirstOperand() {
         console.log(value1);
     }
     else {
+        if (value1) {
+            return;
+        }
         if (!result) {
             value1 = '0';
         }
@@ -146,6 +167,10 @@ function createFirstOperand() {
 }
 
 function createSecondOperand() {
+    if (actions.length === 0) {
+        value1 = numbers.reduce((prev, curr) => prev + curr);
+        return;
+    }
     if (numbers.length !== 0){
         value2 = numbers.reduce((prev, curr) => prev + curr);
         numbers = [];
@@ -191,10 +216,16 @@ function calculating() {
         }
     }
     else {
+        if (action === "/" && value2 === '0') {
+            value1 = 'Error'
+            clearNumber();
+        }
+        else {
     operation = `${value1} ${action} ${value2}`
     result = eval(operation);
     result = parseFloat(result.toFixed(3));
     value1 = String(result);
+        }
     }
     actions = [];
     displayCurrNumber();
