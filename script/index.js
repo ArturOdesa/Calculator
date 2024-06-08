@@ -1,4 +1,3 @@
-
 let numbers = [];
 let actions = [];
 let btn;
@@ -13,48 +12,72 @@ let allBtns = document.querySelectorAll('button');
 let calculatorBtns = document.querySelector('.calc-btns');
 calculatorBtns.addEventListener('click', btnsClickHandler);
 document.addEventListener('keydown', keydownHandler);
+document.addEventListener('keyup', keyupHandler);
 
-function keydownHandler (e) {
+function keyupHandler(e) {
+    let key = e.key;
+    for (let button of allBtns) {
+        if (button.value === key) {
+            button.classList.remove('test-numbers-touch');
+        } else {
+            button.classList.remove('equal-btn-touch');
+        }
+    }
+}
+
+function keydownHandler(e) {
     btnKey = e.key;
     if (btnKey === 'Enter') {
+        for (let button of allBtns) {
+            if (button.value === '=') {
+                button.classList.add('equal-btn-touch');
+            }
+        }
         e.preventDefault();
         createSecondOperand();
     }
     if (!isNaN(btnKey) || btnKey === '.') {
-        console.log(btnKey)
+        for (let button of allBtns) {
+            button.classList.remove('test-oper');
+            if (button.value === btnKey) {
+                button.classList.add('test-numbers-touch');
+            }
+        }
         if (btnKey === '.' && numbers.length === 0) {
             numbers.push('0', '.')
-        }
-        else {
+        } else {
             if (numbers.includes('.', 0) && btnKey === '.') {
                 return;
-            }
-            else {
+            } else {
                 numbers.push(btnKey);
             }
         }
         displayCurrNumber();
-    }
-    else if (btnKey !== 'Enter' && isNaN(btnKey)) {
+    } else if (btnKey !== 'Enter' && isNaN(btnKey)) {
         if (numbers.length === 0 && btnKey === '-' && !result && !value1) {
             numbers.push(btnKey);
             displayCurrNumber();
-        }
-        else {
+        } else {
             if (btnKey === actions[actions.length - 1]) {
                 createSecondOperand();
-            }
-            else {
+            } else {
+                for (let button of allBtns) {
+                    if (btnKey === button.value) {
+                        button.classList.add('test-oper')
+                    } else {
+                        button.classList.remove('test-oper')
+                    }
+                }
                 actions.push(btnKey);
                 createFirstOperand();
-                console.log(actions);
             }
         }
         if (btnKey === 'Backspace' && numbers.length !== 0) {
             clearNumber();
             actions.pop()
-        }
-        else if (btnKey === 'Backspace' && numbers.length === 0) {
+        } else if (btnKey === 'Backspace' && numbers.length === 0) {
+            clearAllData();
+        } else if (btnKey === "Escape") {
             clearAllData();
         }
     }
@@ -63,38 +86,39 @@ function keydownHandler (e) {
 function btnsClickHandler(e) {
     btn = e.target;
     if ((!isNaN(btn.value) || btn.value === '.')) {
+        for (let button of allBtns) {
+            button.classList.remove('test-oper')
+        }
         if (btn.value === '.' && numbers.length === 0) {
             numbers.push('0', '.')
-        }
-        else {
+        } else {
             if (numbers.includes('.', 0) && btn.value === '.') {
                 return;
-            }
-            else {
+            } else {
                 numbers.push(btn.value);
             }
         }
         displayCurrNumber();
-    }
-    else if (btn.value !== '=' && btn.value !== 'AC' && btn.value !== 'reverse' && btn.value !== 'C') {
+    } else if (btn.value !== '=' && btn.value !== 'AC' && btn.value !== 'reverse' && btn.value !== 'C') {
         if (btn.value === '%') {
             actions.push(btn.value);
-            console.log(actions);
             calculating();
-        }
-        else {
+        } else {
             if (btn.value === actions[actions.length - 1]) {
                 createSecondOperand();
-            }
-            else {
+            } else {
+                for (let button of allBtns) {
+                    if (btn.value === button.value) {
+                        button.classList.add('test-oper')
+                    } else {
+                        button.classList.remove('test-oper')
+                    }
+                }
                 actions.push(btn.value);
                 createFirstOperand();
-                console.log(actions);
             }
         }
-    }
-    else {
-        console.log(btn.value)
+    } else {
         switch (btn.value) {
             case "reverse":
                 switchNumberState()
@@ -112,28 +136,28 @@ function btnsClickHandler(e) {
 }
 
 function switchNumberState() {
-    if (result) {
+    if (result && numbers.length === 0) {
         value1 = Number(value1) * -1;
         value1 = String(value1);
-    }
-    else {
+    } else {
         if (numbers[0] !== "-") {
-        numbers.unshift("-");
-        console.log(numbers)
-        }
-        else {
-        numbers.shift();
+            numbers.unshift("-");
+        } else {
+            numbers.shift();
         }
     }
     displayCurrNumber();
 }
 
 function clearNumber() {
-    numbers=[];
+    numbers = [];
     displayCurrNumber();
 }
 
 function clearAllData() {
+    for (let button of allBtns) {
+        button.classList.remove('test-oper')
+    }
     numbers = [];
     actions = [];
     value1 = '';
@@ -145,17 +169,12 @@ function clearAllData() {
 function createFirstOperand() {
     if (numbers.length !== 0) {
         if (result) {
-            console.log(result);
             value1 = result;
-        }
-        else {
+        } else {
             value1 = numbers.reduce((prev, curr) => prev + curr);
             numbers = [];
         }
-
-        console.log(value1);
-    }
-    else {
+    } else {
         if (value1) {
             return;
         }
@@ -167,35 +186,35 @@ function createFirstOperand() {
 }
 
 function createSecondOperand() {
+    if (actions.length === 0 && numbers.length === 0) {
+        return;
+    }
     if (actions.length === 0) {
         value1 = numbers.reduce((prev, curr) => prev + curr);
         return;
     }
-    if (numbers.length !== 0){
+    if (numbers.length !== 0) {
         value2 = numbers.reduce((prev, curr) => prev + curr);
         numbers = [];
-        console.log(value2)
-    }
-    else {
+    } else {
         value2 = value1;
-        console.log(value2);
     }
     calculating();
 }
 
 function createSecondOperandPercent() {
-    if (numbers.length !== 0){
+    if (numbers.length !== 0) {
         value2 = numbers.reduce((prev, curr) => prev + curr);
         numbers = [];
-        console.log(value2)
-    }
-    else {
+    } else {
         value2 = value1;
-        console.log(value2);
     }
 }
 
 function calculating() {
+    for (let button of allBtns) {
+        button.classList.remove('test-oper')
+    }
     let action = actions[actions.length - 1];
     if (action === "%") {
         if (actions.length === 1) {
@@ -204,27 +223,22 @@ function calculating() {
             result = eval(operation);
             result = parseFloat(result.toFixed(3));
             value1 = String(result);
-        }
-        else if (actions.length > 1) {
+        } else if (actions.length > 1) {
             createSecondOperandPercent();
-            operation = operation = `${value1} ${actions[actions.length - 2]} (${value1} / 100 * ${value2})`;
-            console.log(operation);
+            operation = `${value1} ${actions[actions.length - 2]} (${value1} / 100 * ${value2})`;
             result = eval(operation);
             result = parseFloat(result.toFixed(3));
             value1 = String(result);
-            console.log(value1)
         }
-    }
-    else {
+    } else {
         if (action === "/" && value2 === '0') {
             value1 = 'Error'
             clearNumber();
-        }
-        else {
-    operation = `${value1} ${action} ${value2}`
-    result = eval(operation);
-    result = parseFloat(result.toFixed(3));
-    value1 = String(result);
+        } else {
+            operation = `${value1} ${action} ${value2}`
+            result = eval(operation);
+            result = parseFloat(result.toFixed(3));
+            value1 = String(result);
         }
     }
     actions = [];
@@ -235,8 +249,7 @@ function displayCurrNumber() {
     if (numbers.length === 0) {
         if (!value1) {
             displayCurr.textContent = '0';
-        }
-        else {
+        } else {
             displayCurr.textContent = value1;
         }
         let clearBtn = document.querySelector('button[value="C"]');
@@ -244,29 +257,21 @@ function displayCurrNumber() {
             clearBtn.textContent = "AC";
             clearBtn.value = "AC";
         }
-    }
-    else {
+    } else {
         displayCurr.textContent = numbers.reduce((prev, curr) => prev + curr);
     }
     if (numbers.length !== 0) {
         let clearBtn = document.querySelector('button[value="AC"]');
-        if (clearBtn){
-        clearBtn.textContent = "C";
-        clearBtn.value = "C";
+        if (clearBtn) {
+            clearBtn.textContent = "C";
+            clearBtn.value = "C";
         }
     }
 }
 
 displayCurrNumber();
 
-//  for touched buttons (+ - / *)
-//
-// for (let button of allBtns) {
-//     if (btn.value === button.value) {
-//         button.classList.add('test')
-//         console.log(allBtns);
-//     }
-// }
+
 
 
 
