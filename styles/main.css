@@ -1,0 +1,237 @@
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Roboto-light";
+    src: url("../fonts/Roboto-Light.ttf");
+}
+
+@font-face {
+    font-family: "Roboto-bold";
+    src: url("../fonts/Roboto-Medium.ttf");
+}
+
+.body {
+    margin: 0;
+    font-family: Roboto, sans-serif;
+}
+
+.wrapper {
+    background: linear-gradient(to left bottom, #c9c7ff 10%, #f7fffe 85%);
+    height: 100vh;
+    width: 100%;
+    padding-top: 35px;
+}
+
+.calculator-body {
+    display: flex;
+    flex-direction: column;
+    width: 380px;
+    height: 90%;
+    margin: 0 auto;
+    border: solid black;
+    background-color: #070707;
+    border-radius: 45px;
+    color: white;
+    box-shadow: 10px 10px 20px #755f00,
+    -10px -10px 20px #755f00,
+    10px 10px 30px #000,
+    -10px -10px 30px #000
+}
+
+.calculator-body .screen .time-logos-holder {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px 0;
+}
+
+.calculator-body .screen .time-logos-holder .time {
+    padding: 0;
+    margin: 0;
+}
+
+.calculator-body .screen .time-logos-holder .logos-holder img {
+    height: 15px;
+    margin-right: 3px;
+}
+
+.calculator-body .screen .time-logos-holder .logos-holder img:last-of-type {
+    margin-right: 0;
+    width: 20px;
+}
+
+.calculator-body .screen .time-logos-holder .time {
+    font-size: 14px;
+    letter-spacing: .5px;
+    font-family: Roboto-bold, sans-serif;
+}
+
+.calculator-body .screen {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    padding: 0 15px 30px;
+    height: 40%;
+}
+
+.calculator-body .screen .output-field {
+    text-align: right;
+    margin: 0;
+    font-size: 66px;
+    line-height: 66px;
+    font-weight: 300;
+    font-family: Roboto-light, sans-serif;
+    width: 100%;
+    word-wrap: break-word;
+}
+
+.calculator-body .calc-btns {
+    height: 67%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px 45px;
+    column-gap: 10px;
+}
+
+.calculator-body .calc-btns .btn-holder-left {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 79%;
+    row-gap: 10px;
+}
+
+.calculator-body .calc-btns .btn-holder-left .numbers {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    height: 80%;
+}
+
+.calculator-body .calc-btns .btn-holder-right {
+    display: flex;
+    width: 23%;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.calculator-body .calc-btns .btn-holder-left .btn-card {
+    display: flex;
+    height: 19%;
+    column-gap: 10px;
+}
+
+.calculator-body .calc-btns .btn-holder-left .btn-card-numbers {
+    display: flex;
+    height: 23%;
+    column-gap: 10px;
+}
+
+.calculator-body .calc-btns .btn-holder-left .zero-holder {
+    display: flex;
+    height: 23%;
+    column-gap: 10px;
+}
+
+.calculator-body .calc-btns .btn-holder-right .oper-button,
+.calculator-body .calc-btns .btn-holder-right .equal-btn {
+    padding: 0;
+    height: 20%;
+    border-radius: 50%;
+    border: none;
+    color: #fff;
+    background-color: #fa8e00;
+    cursor: pointer;
+    user-select: none;
+    font-size: 40px;
+    line-height: 40px;
+    transition: background-color 0.5s ease-in-out 0.09s;
+}
+
+.calculator-body .calc-btns .btn-holder-right .equal-btn {
+    transition: background-color 0.5s ease-in-out 0.09s;
+}
+
+.calculator-body .calc-btns .btn-holder-right .equal-btn:active,
+.calculator-body .calc-btns .btn-holder-right .equal-btn-touch {
+    background-color: #ffffff;
+    color: #fa8e00;
+    transition: background-color 0.02s ease-in-out;
+}
+
+.calculator-body .calc-btns .btn-holder-right .selected,
+.calculator-body .calc-btns .btn-holder-right .oper-button:hover,
+.calculator-body .calc-btns .btn-holder-right .oper-button:active,
+.calculator-body .calc-btns .btn-holder-right .equal-btn:hover {
+    background-color: #ffffff;
+    color: #fa8e00;
+    transition: background-color 0.5s ease-in-out;
+}
+
+.calculator-body .calc-btns .btn-holder-left .btn-card .suboper-button {
+    font-family: Roboto-bold, sans-serif;
+    padding: 0;
+    border-radius: 50%;
+    color: #070707;
+    user-select: none;
+    cursor: pointer;
+    background-color: #c3c2b1;
+    border: none;
+    font-size: 28px;
+    line-height: 28px;
+    width: 33%;
+    transition: background-color 0.5s ease-in-out 0.09s;
+}
+
+.calculator-body .calc-btns .btn-holder-left .btn-card .suboper-button:active,
+.calculator-body .calc-btns .btn-holder-left .btn-card .suboper-button:hover {
+    background-color: #f3f3f3;
+    transition: background-color 0.02s ease-in-out;
+}
+
+.calculator-body .calc-btns .btn-holder-left .btn-card-numbers .button,
+.calculator-body .calc-btns .btn-holder-left .zero-holder .button {
+    padding: 0;
+    border: none;
+    color: #fff;
+    user-select: none;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 38px;
+    width: 33%;
+    background-color: rgba(60, 60, 60, 0.84);
+    transition: background-color 0.5s ease-in-out 0.09s;
+}
+
+.calculator-body .calc-btns .btn-holder-left .btn-card-numbers .button:active,
+.calculator-body .calc-btns .btn-holder-left .btn-card-numbers .button:hover,
+.calculator-body .calc-btns .btn-holder-left .btn-card-numbers .number-touch,
+.calculator-body .calc-btns .btn-holder-left .zero-holder .zero:active,
+.calculator-body .calc-btns .btn-holder-left .zero-holder .zero:hover,
+.calculator-body .calc-btns .btn-holder-left .zero-holder .number-touch,
+.calculator-body .calc-btns .btn-holder-left .zero-holder .button:active,
+.calculator-body .calc-btns .btn-holder-left .zero-holder .button:hover {
+    background-color: rgb(138, 138, 138);
+    transition: background-color 0.02s ease-in-out;
+}
+
+.calculator-body .calc-btns .btn-holder-left .zero {
+    width: 66%;
+    text-align: left;
+    padding: 0 32px;
+    border: none;
+    color: #fff;
+    background-color: rgba(60, 60, 60, 0.84);
+    user-select: none;
+    cursor: pointer;
+    border-radius: 40px;
+    font-size: 38px;
+    transition: background-color 0.5s ease-in-out 0.09s;
+}
+
+
+
