@@ -7,6 +7,7 @@ let value2;
 let operation;
 let result;
 
+let timePara = document.querySelector('#time');
 let displayCurr = document.querySelector('#output-field-bottom');
 let allBtns = document.querySelectorAll('button');
 let calculatorBtns = document.querySelector('.calc-btns');
@@ -14,11 +15,18 @@ calculatorBtns.addEventListener('click', btnsClickHandler);
 document.addEventListener('keydown', keydownHandler);
 document.addEventListener('keyup', keyupHandler);
 
+function setTime() {
+    let time = new Date();
+    let hours = time.getHours().toString();
+    let minutes = time.getMinutes().toString();
+    timePara.textContent = `${hours}:${minutes}`;
+}
+
 function keyupHandler(e) {
     let key = e.key;
     for (let button of allBtns) {
         if (button.value === key) {
-            button.classList.remove('test-numbers-touch');
+            button.classList.remove('number-touch');
         } else {
             button.classList.remove('equal-btn-touch');
         }
@@ -38,9 +46,9 @@ function keydownHandler(e) {
     }
     if (!isNaN(btnKey) || btnKey === '.') {
         for (let button of allBtns) {
-            button.classList.remove('test-oper');
+            button.classList.remove('selected');
             if (button.value === btnKey) {
-                button.classList.add('test-numbers-touch');
+                button.classList.add('number-touch');
             }
         }
         if (btnKey === '.' && numbers.length === 0) {
@@ -63,9 +71,9 @@ function keydownHandler(e) {
             } else {
                 for (let button of allBtns) {
                     if (btnKey === button.value) {
-                        button.classList.add('test-oper')
+                        button.classList.add('selected')
                     } else {
-                        button.classList.remove('test-oper')
+                        button.classList.remove('selected')
                     }
                 }
                 actions.push(btnKey);
@@ -87,7 +95,7 @@ function btnsClickHandler(e) {
     btn = e.target;
     if ((!isNaN(btn.value) || btn.value === '.')) {
         for (let button of allBtns) {
-            button.classList.remove('test-oper')
+            button.classList.remove('selected')
         }
         if (btn.value === '.' && numbers.length === 0) {
             numbers.push('0', '.')
@@ -109,9 +117,9 @@ function btnsClickHandler(e) {
             } else {
                 for (let button of allBtns) {
                     if (btn.value === button.value) {
-                        button.classList.add('test-oper')
+                        button.classList.add('selected')
                     } else {
-                        button.classList.remove('test-oper')
+                        button.classList.remove('selected')
                     }
                 }
                 actions.push(btn.value);
@@ -156,7 +164,7 @@ function clearNumber() {
 
 function clearAllData() {
     for (let button of allBtns) {
-        button.classList.remove('test-oper')
+        button.classList.remove('selected')
     }
     numbers = [];
     actions = [];
@@ -213,7 +221,7 @@ function createSecondOperandPercent() {
 
 function calculating() {
     for (let button of allBtns) {
-        button.classList.remove('test-oper')
+        button.classList.remove('selected')
     }
     let action = actions[actions.length - 1];
     if (action === "%") {
@@ -267,8 +275,10 @@ function displayCurrNumber() {
             clearBtn.value = "C";
         }
     }
+    setTime();
 }
 
+setTime();
 displayCurrNumber();
 
 
