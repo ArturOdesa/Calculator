@@ -28,7 +28,7 @@
 .calculator-body {
     display: flex;
     flex-direction: column;
-    width: 380px;
+    width: 350px;
     height: 90%;
     margin: 0 auto;
     border: solid black;
@@ -45,7 +45,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 5px 0
+    padding: 15px 0;
 }
 
 .calculator-body .screen .time-logos-holder .time {
@@ -74,15 +74,16 @@
     flex-wrap: wrap;
     flex-direction: column-reverse;
     justify-content: space-between;
-    padding: 0 30px 30px 15px;
+    padding: 0 30px 20px 15px;
     height: 40%;
+    overflow: hidden;
 }
 
 .calculator-body .screen .output-field {
     text-align: right;
     margin: 0;
-    font-size: 66px;
-    line-height: 66px;
+    font-size: 56px;
+    line-height: 44px;
     font-weight: 300;
     font-family: Roboto-light, sans-serif;
     width: 100%;
@@ -93,8 +94,8 @@
     height: 67%;
     display: flex;
     justify-content: space-between;
-    padding: 0 10px 45px;
-    column-gap: 10px;
+    padding: 0 11px 45px;
+    column-gap: 11px;
 }
 
 .calculator-body .calc-btns .btn-holder-left {
@@ -122,19 +123,19 @@
 .calculator-body .calc-btns .btn-holder-left .btn-card {
     display: flex;
     height: 19%;
-    column-gap: 10px;
+    column-gap: 11px;
 }
 
 .calculator-body .calc-btns .btn-holder-left .btn-card-numbers {
     display: flex;
     height: 23%;
-    column-gap: 10px;
+    column-gap: 11px;
 }
 
 .calculator-body .calc-btns .btn-holder-left .zero-holder {
     display: flex;
     height: 23%;
-    column-gap: 10px;
+    column-gap: 11px;
 }
 
 .calculator-body .calc-btns .btn-holder-right .oper-button,
@@ -147,8 +148,8 @@
     background-color: #fa8e00;
     cursor: pointer;
     user-select: none;
-    font-size: 40px;
-    line-height: 40px;
+    font-size: 32px;
+    line-height: 32px;
     transition: background-color 0.5s ease-in-out 0.09s;
 }
 
@@ -181,8 +182,8 @@
     cursor: pointer;
     background-color: #c3c2b1;
     border: none;
-    font-size: 28px;
-    line-height: 28px;
+    font-size: 26px;
+    line-height: 25px;
     width: 33%;
     transition: background-color 0.5s ease-in-out 0.09s;
 }
@@ -201,7 +202,7 @@
     user-select: none;
     cursor: pointer;
     border-radius: 50%;
-    font-size: 38px;
+    font-size: 32px;
     width: 33%;
     background-color: rgba(60, 60, 60, 0.84);
     transition: background-color 0.5s ease-in-out 0.09s;
@@ -220,16 +221,16 @@
 }
 
 .calculator-body .calc-btns .btn-holder-left .zero {
-    width: 66%;
+    width: 68%;
     text-align: left;
-    padding: 0 32px;
+    padding: 0 29px;
     border: none;
     color: #fff;
     background-color: rgba(60, 60, 60, 0.84);
     user-select: none;
     cursor: pointer;
     border-radius: 40px;
-    font-size: 38px;
+    font-size: 32px;
     transition: background-color 0.5s ease-in-out 0.09s;
 }
 
