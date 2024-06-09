@@ -17,8 +17,8 @@ document.addEventListener('keyup', keyupHandler);
 
 function setTime() {
     let time = new Date();
-    let hours = time.getHours().toString();
-    let minutes = time.getMinutes().toString();
+    let hours = time.getHours().toString().padStart(2, '0');
+    let minutes = time.getMinutes().toString().padStart(2, '0');
     timePara.textContent = `${hours}:${minutes}`;
 }
 
