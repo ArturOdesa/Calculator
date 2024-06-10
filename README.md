@@ -2,7 +2,7 @@
 
 ### Description
 
-*This is pet-project represents Calculator web-application.* In the web-app you can calculate simple ariphmetic tasks, e.g. sum, subtract, multiply, divisioning, counting percentage. 
+*This is pet-project represents Calculator web-application.* In the web-app you can calculate simple ariphmetic tasks, e.g. sum, subtract, multiply, division, counting percentage. 
 <b>Input is available by both: mouse and keyboard.</b>
 <br>
 During the project I used HTML, CSS, Flexbox, JavaScript technologies and tools.
